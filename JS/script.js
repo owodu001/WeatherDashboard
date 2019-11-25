@@ -1,0 +1,121 @@
+let city = "";
+
+// add event listener to search button
+const searchButton = document.getElementById("button");
+searchButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    // Grab text the user typed into the search input, add to the queryParams object
+
+    city = document.getElementById("input").value.trim();
+    const dataStr = localStorage.getItem("city") || "[]";
+
+    const data = JSON.parse(dataStr);
+    data.push(city);
+    localStorage.setItem("city", JSON.stringify(data));
+    console.log(city);
+
+    // Looping through the array of cities
+    for (let i = 0; i < dataStr.length; i++) {
+
+        // dynamicaly generating buttons for each city in the array.
+        const a = document.createElement("button");
+        // Adding a class
+        a.classList.add("city");
+        // Adding a data-attribute with a value of the city at index i
+        a.setAttribute("data-name", dataStr[i]);
+        // Providing the button's text with a value of the city at index i
+        a.innerHTML = dataStr[i];
+        // Adding the button to the HTML
+        document.getElementById("one").append(a);
+    }
+
+    // The city from the textbox is then added to the array
+    // city.push(inputEl);
+
+
+
+    function getWeather() {
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
+        const apiKey = "7a8635b4bf69d952fca178d66748f81f";
+        // const cityNames = ["houston", "minneapolis", "memphis", "las angeles", "raleigh"];
+        // let i = 0;
+
+        // const countryCode = ",us&mode=xml";
+        // let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityNames + "&APPID=" + apiKey;
+
+        // console.log(queryURL);
+
+
+        axios.get(queryURL)
+            // After the data comes back from the API
+            .then(function(response) {
+                // Storing an array of results in the results variable
+                // console.log(response);
+                const results = response.data;
+                const cityData = response.data.city;
+                const forecastArray = response.data.list;
+                const name = response.data.name;
+                // console.log(results.name)
+                //     // console.log(JSON.stringify(response.data));
+                // console.log(response.data.wind.speed);
+                // // console.log(response.data.list)
+                // // const day1 = forecastArray[0];
+                // console.log(response.data.main.temp);
+                // console.log(response.data.main.humidity);
+                // console.log(day1.wind.speed);
+                // console.log(day1.dt_txt);
+
+                // // Transfer content to HTML
+                document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details</h1>";
+                document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
+                document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
+                document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
+            })
+
+        let queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
+        console.log(queryURL2);
+
+        axios.get(queryURL2)
+            .then(function(response) {
+                // date, icon, temp, humidity
+                const forecastArray = response.data.list;
+                console.log(response);
+                let day1 = forecastArray[0];
+                console.log(forecastArray[8]);
+                let day2 = forecastArray[8];
+                let day3 = forecastArray[16];
+                let day4 = forecastArray[24];
+                let day5 = forecastArray[32];
+
+                // document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details</h1>";
+                // document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
+                // document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
+                // document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
+            })
+
+
+
+
+        // // Log the data in the console as well
+        // console.log("Wind Speed: " + response.data.wind.speed);
+        // console.log("Humidity: " + response.data.main.humidity);
+        // console.log("Temperature (F): " + response.data.main.temp);
+
+
+
+
+        // Task List:
+        // add event listener to search button X
+        // capture input box X
+        // hook up input box to display search results in right hand container
+        // display city, current date, temp, humidity, wind speed, and uv index
+        // display 5 day forecast for searched city below
+        // each day must include:
+        // date, img of weather type ->sunny, cloudy, etc., temp, and humidity
+        // when search happens, button below the search field must be created for 
+        // the searched city
+        // when button is clicked, same results must display as they would
+        // if city were typed and searched
+    }
+    getWeather();
+});
