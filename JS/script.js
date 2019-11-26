@@ -54,8 +54,15 @@ searchButton.addEventListener("click", function(event) {
             // After the data comes back from the API
             .then(function(response) {
                 console.log(response)
-                let icon = response.data.weather[0].icon;
-                let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                let image = response.data.weather[0].icon;
+                let iconURL = "http://openweathermap.org/img/wn/" + image + "@2x.png";
+                console.log(iconURL)
+                const imgEl = document.querySelector("img");
+                console.log(imgEl)
+                let displayImage = imgEl.setAttribute("src", iconURL);
+                // displayImage.innerText
+
+
                 let lat = response.data.coord.lat;
                 let lon = response.data.coord.lon;
 
@@ -84,10 +91,8 @@ searchButton.addEventListener("click", function(event) {
                 // console.log(day1.dt_txt);
 
                 // // Transfer content to HTML
-                document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details</h1>";
-                // let newImage = document.createElement("img");
-                // newImage.createAttribute("src", iconURL);
-                // document.getElementById("city").append(newImage);
+                document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details</h1>" + moment().format('L') + "<img src=" + iconURL + ">";
+
                 document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
                 document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
                 document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
@@ -102,7 +107,7 @@ searchButton.addEventListener("click", function(event) {
                 const forecastArray = response.data.list;
                 // console.log(response);
                 let day1 = forecastArray[0];
-                console.log(forecastArray[8].weather[0].icon);
+                // console.log(forecastArray[8].weather[0].icon);
                 let day2 = forecastArray[8];
                 let day3 = forecastArray[16];
                 let day4 = forecastArray[24];
