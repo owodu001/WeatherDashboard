@@ -71,8 +71,8 @@ searchButton.addEventListener("click", function(event) {
                 let queryURL3 = "http://api.openweathermap.org/data/2.5/uvi?appid=7a8635b4bf69d952fca178d66748f81f&lat=" + lat + "&lon=" + lon;
                 axios.get(queryURL3)
                     .then(function(uvResponse) {
-                        // console.log(uvResponse)
-
+                        console.log(uvResponse);
+                        document.getElementById("uv").innerHTML = "UV Index: " + uvResponse.data.value;
                     })
                     // Storing an array of results in the results variable
                     // console.log(response);
@@ -91,7 +91,7 @@ searchButton.addEventListener("click", function(event) {
                 // console.log(day1.dt_txt);
 
                 // // Transfer content to HTML
-                document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details</h1>" + moment().format('L') + "<img src=" + iconURL + ">";
+                document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details" + " " + moment().format('L') + "</h1>" + "<img src=" + iconURL + ">";
 
                 document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
                 document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
