@@ -1,3 +1,6 @@
+// "2019-11-27 03:00:00".split(" ")
+// (2) ["2019-11-27", "03:00:00"]
+
 let city = "";
 
 // add event listener to search button
@@ -8,23 +11,24 @@ searchButton.addEventListener("click", function(event) {
 
     city = document.getElementById("input").value.trim();
     const dataStr = localStorage.getItem("city") || "[]";
-
-    const data = JSON.parse(dataStr);
+    // console.log(dataStr.length)
+    let data = JSON.parse(dataStr);
+    // console.log(data)
     data.push(city);
     localStorage.setItem("city", JSON.stringify(data));
-    console.log(city);
+
 
     // Looping through the array of cities
-    for (let i = 0; i < dataStr.length; i++) {
-
+    for (let i = 0; i < data.length; i++) {
+        // console.log(city);
         // dynamicaly generating buttons for each city in the array.
         const a = document.createElement("button");
         // Adding a class
         a.classList.add("city");
         // Adding a data-attribute with a value of the city at index i
-        a.setAttribute("data-name", dataStr[i]);
+        a.setAttribute("data-name", data[i]);
         // Providing the button's text with a value of the city at index i
-        a.innerHTML = dataStr[i];
+        a.innerHTML = data[i];
         // Adding the button to the HTML
         document.getElementById("one").append(a);
     }
@@ -49,8 +53,22 @@ searchButton.addEventListener("click", function(event) {
         axios.get(queryURL)
             // After the data comes back from the API
             .then(function(response) {
-                // Storing an array of results in the results variable
-                // console.log(response);
+                console.log(response)
+                let icon = response.data.weather[0].icon;
+                let iconURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+                let lat = response.data.coord.lat;
+                let lon = response.data.coord.lon;
+
+                // console.log(lat);
+                // console.log(lon);
+                let queryURL3 = "http://api.openweathermap.org/data/2.5/uvi?appid=7a8635b4bf69d952fca178d66748f81f&lat=" + lat + "&lon=" + lon;
+                axios.get(queryURL3)
+                    .then(function(uvResponse) {
+                        // console.log(uvResponse)
+
+                    })
+                    // Storing an array of results in the results variable
+                    // console.log(response);
                 const results = response.data;
                 const cityData = response.data.city;
                 const forecastArray = response.data.list;
@@ -67,6 +85,9 @@ searchButton.addEventListener("click", function(event) {
 
                 // // Transfer content to HTML
                 document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details</h1>";
+                // let newImage = document.createElement("img");
+                // newImage.createAttribute("src", iconURL);
+                // document.getElementById("city").append(newImage);
                 document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
                 document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
                 document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
@@ -79,9 +100,9 @@ searchButton.addEventListener("click", function(event) {
             .then(function(response) {
                 // date, icon, temp, humidity
                 const forecastArray = response.data.list;
-                console.log(response);
+                // console.log(response);
                 let day1 = forecastArray[0];
-                console.log(forecastArray[8]);
+                console.log(forecastArray[8].weather[0].icon);
                 let day2 = forecastArray[8];
                 let day3 = forecastArray[16];
                 let day4 = forecastArray[24];
