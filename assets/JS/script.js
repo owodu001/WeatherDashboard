@@ -100,6 +100,10 @@ searchButton.addEventListener("click", function(event) {
 
         let queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
 
+        function k2f(K) {
+            return (K - 273.15) * 1.80 + 32;
+        }
+
         axios.get(queryURL2)
             .then(function(response) {
                 // date, icon, temp, humidity
@@ -117,8 +121,8 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL = "http://openweathermap.org/img/wn/" + icon1 + "@2x.png";
 
                 document.getElementById("date1").innerHTML = array1[0] + "<img src=" + iconURL + ">";
-                document.getElementById("temp1").innerHTML = "Humidity: " + temp1;
-                document.getElementById("humidity1").innerHTML = "Temp (F) " + humidity1;
+                document.getElementById("temp1").innerHTML = "Temp (F) " + temp1;
+                document.getElementById("humidity1").innerHTML = "Humidity: " + humidity1;
 
 
                 // DAY TWO OF FORECAST
@@ -133,8 +137,8 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL2 = "http://openweathermap.org/img/wn/" + icon2 + "@2x.png";
 
                 document.getElementById("date2").innerHTML = array2[0] + "<img src=" + iconURL2 + ">";
-                document.getElementById("temp2").innerHTML = "Humidity: " + temp2;
-                document.getElementById("humidity2").innerHTML = "Temp (F) " + humidity2;
+                document.getElementById("temp2").innerHTML = "Temp (F) " + temp2;
+                document.getElementById("humidity2").innerHTML = "Humidity: " + humidity2;
 
                 // DAY THREE OF FORECAST
                 let day3 = forecastArray[19];
@@ -147,8 +151,8 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL3 = "http://openweathermap.org/img/wn/" + icon3 + "@2x.png";
 
                 document.getElementById("date3").innerHTML = array3[0] + "<img src=" + iconURL3 + ">";
-                document.getElementById("temp3").innerHTML = "Humidity: " + temp3;
-                document.getElementById("humidity3").innerHTML = "Temp (F) " + humidity3;
+                document.getElementById("temp3").innerHTML = "Temp (F) " + temp3;
+                document.getElementById("humidity3").innerHTML = "Humidity: " + humidity3;
 
                 // DAY FOUR OF FORECAST
                 let day4 = forecastArray[27];
@@ -161,8 +165,8 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL4 = "http://openweathermap.org/img/wn/" + icon4 + "@2x.png";
 
                 document.getElementById("date4").innerHTML = array4[0] + "<img src=" + iconURL4 + ">";
-                document.getElementById("temp4").innerHTML = "Humidity: " + temp4;
-                document.getElementById("humidity4").innerHTML = "Temp (F) " + humidity4;
+                document.getElementById("temp4").innerHTML = "Temp (F) " + temp4;
+                document.getElementById("humidity4").innerHTML = "Humidity: " + humidity4;
 
                 // DAY FIVE OF FORECAST
                 let day5 = forecastArray[35];
@@ -175,8 +179,8 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL5 = "http://openweathermap.org/img/wn/" + icon5 + "@2x.png";
 
                 document.getElementById("date5").innerHTML = array5[0] + "<img src=" + iconURL5 + ">";
-                document.getElementById("temp5").innerHTML = "Humidity: " + temp5;
-                document.getElementById("humidity5").innerHTML = "Temp (F) " + humidity5;
+                document.getElementById("temp5").innerHTML = "Temp (F) " + temp5;
+                document.getElementById("humidity5").innerHTML = "Humidity: " + humidity5;
 
                 // "2019-11-27 03:00:00".split(" ")
                 // (2) ["2019-11-27", "03:00:00"]
