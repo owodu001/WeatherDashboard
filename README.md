@@ -11,7 +11,7 @@ This is a weather dashboard application with search functionality to find curren
 
 
 Visuals:
-![weatherDash](https://user-images.githubusercontent.com/55159065/69696836-81695180-10a6-11ea-801f-9e21d7d2ca84.png)
+![weather1](https://user-images.githubusercontent.com/55159065/69697693-ce4e2780-10a8-11ea-8c10-f270cd3be026.png)
 
 
 License:
