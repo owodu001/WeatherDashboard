@@ -31,7 +31,7 @@ searchButton.addEventListener("click", function(event) {
         document.getElementById("one").append(a);
         // Function for displaying the city info
         a.addEventListener("click", function() {
-            document.querySelectorAll(".city").setAttribute("href", queryURL);
+            window.open(queryURL);
         });
 
     }
@@ -93,8 +93,8 @@ searchButton.addEventListener("click", function(event) {
                 // // Transfer content to HTML
                 document.getElementById("city").innerHTML = "<h1>" + results.name + " Weather Details" + " " + moment().format('L') + "</h1>" + "<img src=" + iconURL + ">";
 
-                document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
-                document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
+                document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed + " " + "MPH";
+                document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity + "%";
                 document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
             })
 
