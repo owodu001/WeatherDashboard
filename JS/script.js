@@ -4,7 +4,7 @@ let city = "";
 const searchButton = document.getElementById("button");
 searchButton.addEventListener("click", function(event) {
     event.preventDefault();
-    // Grab text the user typed into the search input, add to the queryParams object
+
 
     city = document.getElementById("input").value.trim();
     const dataStr = localStorage.getItem("city") || "[]";
@@ -14,10 +14,11 @@ searchButton.addEventListener("click", function(event) {
     data.push(city);
     localStorage.setItem("city", JSON.stringify(data));
 
-
+    document.getElementById("buttons-view").innerHTML = "";
     // Looping through the array of cities
     for (let i = 0; i < data.length; i++) {
-        // console.log(city);
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
+
         // dynamicaly generating buttons for each city in the array.
         const a = document.createElement("button");
         // Adding a class
@@ -28,10 +29,12 @@ searchButton.addEventListener("click", function(event) {
         a.innerHTML = data[i];
         // Adding the button to the HTML
         document.getElementById("one").append(a);
-    }
+        // Function for displaying the city info
+        a.addEventListener("click", function() {
+            document.querySelectorAll(".city").setAttribute("href", queryURL);
+        });
 
-    // The city from the textbox is then added to the array
-    // city.push(inputEl);
+    }
 
 
 
@@ -101,13 +104,14 @@ searchButton.addEventListener("click", function(event) {
             .then(function(response) {
                 // date, icon, temp, humidity
                 const forecastArray = response.data.list;
-                // console.log(response);
-                let day1 = forecastArray[0];
+
+                // DAY ONE OF FORECAST
+                let day1 = forecastArray[3];
                 let date1 = day1.dt_txt;
                 let icon1 = day1.weather[0].icon;
                 let temp1 = day1.main.temp;
                 let humidity1 = day1.main.humidity;
-
+                console.log(forecastArray);
                 let array1 = date1.split(" ");
 
                 let iconURL = "http://openweathermap.org/img/wn/" + icon1 + "@2x.png";
@@ -115,14 +119,53 @@ searchButton.addEventListener("click", function(event) {
                 document.getElementById("date1").innerHTML = array1[0] + "<img src=" + iconURL + ">";
                 document.getElementById("temp1").innerHTML = "Humidity: " + temp1;
                 document.getElementById("humidity1").innerHTML = "Temp (F) " + humidity1;
-                console.log(icon1)
-                    // console.log(forecastArray[8].weather[0].icon);
-                let day2 = forecastArray[8];
-                let day3 = forecastArray[16];
-                let day4 = forecastArray[24];
-                let day5 = forecastArray[32];
-                console.log(day1);
-                console.log(day2);
+
+
+                // DAY TWO OF FORECAST
+                let day2 = forecastArray[11];
+                let date2 = day2.dt_txt;
+                let icon2 = day2.weather[0].icon;
+                let temp2 = day2.main.temp;
+                let humidity2 = day2.main.humidity;
+                console.log(forecastArray);
+                let array2 = date2.split(" ");
+
+                let iconURL2 = "http://openweathermap.org/img/wn/" + icon2 + "@2x.png";
+
+                document.getElementById("date2").innerHTML = array2[0] + "<img src=" + iconURL2 + ">";
+                document.getElementById("temp2").innerHTML = "Humidity: " + temp2;
+                document.getElementById("humidity2").innerHTML = "Temp (F) " + humidity2;
+
+                // DAY THREE OF FORECAST
+                let day3 = forecastArray[19];
+                let date3 = day3.dt_txt;
+                let icon3 = day3.weather[0].icon;
+                let temp3 = day3.main.temp;
+                let humidity3 = day3.main.humidity;
+                let array3 = date3.split(" ");
+
+                let iconURL3 = "http://openweathermap.org/img/wn/" + icon3 + "@2x.png";
+
+                document.getElementById("date3").innerHTML = array3[0] + "<img src=" + iconURL3 + ">";
+                document.getElementById("temp3").innerHTML = "Humidity: " + temp3;
+                document.getElementById("humidity3").innerHTML = "Temp (F) " + humidity3;
+
+                // DAY FOUR OF FORECAST
+                let day4 = forecastArray[27];
+                let date4 = day4.dt_txt;
+                let icon4 = day4.weather[0].icon;
+                let temp4 = day4.main.temp;
+                let humidity4 = day4.main.humidity;
+                let array4 = date4.split(" ");
+
+                let iconURL4 = "http://openweathermap.org/img/wn/" + icon4 + "@2x.png";
+
+                document.getElementById("date4").innerHTML = array4[0] + "<img src=" + iconURL4 + ">";
+                document.getElementById("temp4").innerHTML = "Humidity: " + temp4;
+                document.getElementById("humidity4").innerHTML = "Temp (F) " + humidity4;
+
+                // DAY FIVE OF FORECAST
+                let day5 = forecastArray[35];
 
 
                 // "2019-11-27 03:00:00".split(" ")
@@ -136,27 +179,12 @@ searchButton.addEventListener("click", function(event) {
 
 
 
-
         // // Log the data in the console as well
         // console.log("Wind Speed: " + response.data.wind.speed);
         // console.log("Humidity: " + response.data.main.humidity);
         // console.log("Temperature (F): " + response.data.main.temp);
 
-
-
-
-        // Task List:
-        // add event listener to search button X
-        // capture input box X
-        // hook up input box to display search results in right hand container
-        // display city, current date, temp, humidity, wind speed, and uv index
-        // display 5 day forecast for searched city below
-        // each day must include:
-        // date, img of weather type ->sunny, cloudy, etc., temp, and humidity
-        // when search happens, button below the search field must be created for 
-        // the searched city
-        // when button is clicked, same results must display as they would
-        // if city were typed and searched
     }
     getWeather();
+
 });
