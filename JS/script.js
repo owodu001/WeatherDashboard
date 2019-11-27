@@ -166,7 +166,17 @@ searchButton.addEventListener("click", function(event) {
 
                 // DAY FIVE OF FORECAST
                 let day5 = forecastArray[35];
+                let date5 = day5.dt_txt;
+                let icon5 = day5.weather[0].icon;
+                let temp5 = day5.main.temp;
+                let humidity5 = day5.main.humidity;
+                let array5 = date5.split(" ");
 
+                let iconURL5 = "http://openweathermap.org/img/wn/" + icon5 + "@2x.png";
+
+                document.getElementById("date5").innerHTML = array5[0] + "<img src=" + iconURL5 + ">";
+                document.getElementById("temp5").innerHTML = "Humidity: " + temp5;
+                document.getElementById("humidity5").innerHTML = "Temp (F) " + humidity5;
 
                 // "2019-11-27 03:00:00".split(" ")
                 // (2) ["2019-11-27", "03:00:00"]
