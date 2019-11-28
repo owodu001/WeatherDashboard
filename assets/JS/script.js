@@ -1,3 +1,15 @@
+// function domContentLoaded
+// let data = JSON.parse(dataStr);
+// const dataStr = localStorage.getItem("city") || "[]";
+// console.log(data[data.length - 1]);
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    const dataStr = localStorage.getItem("city") || "[]";
+    let data = JSON.parse(dataStr);
+
+    console.log(data[data.length - 1]);
+})
+
 let city = "";
 
 // add event listener to search button
@@ -17,7 +29,6 @@ searchButton.addEventListener("click", function(event) {
     document.getElementById("buttons-view").innerHTML = "";
     // Looping through the array of cities
     for (let i = 0; i < data.length; i++) {
-        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
 
         // dynamicaly generating buttons for each city in the array.
         const a = document.createElement("button");
@@ -31,14 +42,15 @@ searchButton.addEventListener("click", function(event) {
         document.getElementById("one").append(a);
         // Function for displaying the city info
         a.addEventListener("click", function() {
-            window.open(queryURL);
+            console.log(a);
+            getWeather(data[i]);
         });
 
     }
 
 
 
-    function getWeather() {
+    function getWeather(city) {
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
         const apiKey = "7a8635b4bf69d952fca178d66748f81f";
         // const cityNames = ["houston", "minneapolis", "memphis", "las angeles", "raleigh"];
@@ -100,9 +112,9 @@ searchButton.addEventListener("click", function(event) {
 
         let queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
 
-        function k2f(K) {
-            return (K - 273.15) * 1.80 + 32;
-        }
+        // function k2f(K) {
+        //     return (K - 273.15) * 1.80 + 32;
+        // }
 
         axios.get(queryURL2)
             .then(function(response) {
@@ -115,7 +127,7 @@ searchButton.addEventListener("click", function(event) {
                 let icon1 = day1.weather[0].icon;
                 let temp1 = day1.main.temp;
                 let humidity1 = day1.main.humidity;
-                console.log(forecastArray);
+                // console.log(forecastArray);
                 let array1 = date1.split(" ");
 
                 let iconURL = "http://openweathermap.org/img/wn/" + icon1 + "@2x.png";
@@ -131,7 +143,7 @@ searchButton.addEventListener("click", function(event) {
                 let icon2 = day2.weather[0].icon;
                 let temp2 = day2.main.temp;
                 let humidity2 = day2.main.humidity;
-                console.log(forecastArray);
+                // console.log(forecastArray);
                 let array2 = date2.split(" ");
 
                 let iconURL2 = "http://openweathermap.org/img/wn/" + icon2 + "@2x.png";
@@ -199,6 +211,12 @@ searchButton.addEventListener("click", function(event) {
         // console.log("Temperature (F): " + response.data.main.temp);
 
     }
-    getWeather();
+
+
+    getWeather(city);
 
 });
+
+// to do:
+// get buttons to be functional and prevent duplicates
+// get page to display last searched city on new page load
