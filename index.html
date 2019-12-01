@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="assets/CSS/style.css">
     <title>Document</title>
 </head>
 
@@ -17,20 +17,23 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <h4>Search for a City:</h4>
                 <div id="buttons-view"></div>
                 <div class="row mb-5">
+                    <div class="input-group input-group-sm">
+                        <input id="input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        <div class="input-group-prepend">
+                            <button id="button" type="button" class="btn btn-primary btn-sm mr-5 mb-1">Search</button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row height">
                     <div class="col-8">
-                        <div class="input-group input-group-sm">
-                            <input id="input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            <div class="input-group-prepend">
-                                <button id="button" type="button" class="btn btn-primary btn-sm mr-5 mb-5">Search</button>
-                            </div>
-                            <div class="row height"></div>
-                            <div class="card">
-                                <div id="one" class="card-body"></div>
-                            </div>
+                        <div class="card">
+                            <div id="one" class="card-body"></div>
                         </div>
                     </div>
                 </div>
