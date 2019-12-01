@@ -1,20 +1,23 @@
-// function domContentLoaded
-// let data = JSON.parse(dataStr);
-// const dataStr = localStorage.getItem("city") || "[]";
-// console.log(data[data.length - 1]);
+function start() {
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    const dataStr = localStorage.getItem("city") || "[]";
-    let data = JSON.parse(dataStr);
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const dataStr = localStorage.getItem("city") || "[]";
+        let data = JSON.parse(dataStr);
 
-    console.log(data[data.length - 1]);
-})
+        console.log(data[data.length - 1]);
+        getWeather(data[data.length - 1]);
+        event.preventDefault();
+        // location.reload(false);
+
+    })
+}
+start();
 
 let city = "";
 
 // add event listener to search button
 const searchButton = document.getElementById("button");
-searchButton.addEventListener("click", function(event) {
+searchButton.addEventListener("click", function displayData(event) {
     event.preventDefault();
 
 
@@ -27,6 +30,7 @@ searchButton.addEventListener("click", function(event) {
     localStorage.setItem("city", JSON.stringify(data));
 
     document.getElementById("buttons-view").innerHTML = "";
+
     // Looping through the array of cities
     for (let i = 0; i < data.length; i++) {
 
@@ -34,7 +38,10 @@ searchButton.addEventListener("click", function(event) {
         const a = document.createElement("button");
         // Adding a class
         a.classList.add("city");
-        // Adding a data-attribute with a value of the city at index i
+        a.classList.add("btn")
+        a.classList.add("btn-outline-secondary")
+        a.classList.add("width")
+            // Adding a data-attribute with a value of the city at index i
         a.setAttribute("data-name", data[i]);
         // Providing the button's text with a value of the city at index i
         a.innerHTML = data[i];
@@ -107,7 +114,7 @@ searchButton.addEventListener("click", function(event) {
 
                 document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed + " " + "MPH";
                 document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity + "%";
-                document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
+                document.getElementById("temp").innerHTML = "Temperature (F) " + Math.floor(response.data.main.temp);
             })
 
         let queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=7a8635b4bf69d952fca178d66748f81f";
@@ -133,7 +140,7 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL = "http://openweathermap.org/img/wn/" + icon1 + "@2x.png";
 
                 document.getElementById("date1").innerHTML = array1[0] + "<img src=" + iconURL + ">";
-                document.getElementById("temp1").innerHTML = "Temp (F) " + temp1;
+                document.getElementById("temp1").innerHTML = "Temp (F) " + Math.floor(temp1);
                 document.getElementById("humidity1").innerHTML = "Humidity: " + humidity1;
 
 
@@ -149,7 +156,7 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL2 = "http://openweathermap.org/img/wn/" + icon2 + "@2x.png";
 
                 document.getElementById("date2").innerHTML = array2[0] + "<img src=" + iconURL2 + ">";
-                document.getElementById("temp2").innerHTML = "Temp (F) " + temp2;
+                document.getElementById("temp2").innerHTML = "Temp (F) " + Math.floor(temp2);
                 document.getElementById("humidity2").innerHTML = "Humidity: " + humidity2;
 
                 // DAY THREE OF FORECAST
@@ -163,7 +170,7 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL3 = "http://openweathermap.org/img/wn/" + icon3 + "@2x.png";
 
                 document.getElementById("date3").innerHTML = array3[0] + "<img src=" + iconURL3 + ">";
-                document.getElementById("temp3").innerHTML = "Temp (F) " + temp3;
+                document.getElementById("temp3").innerHTML = "Temp (F) " + Math.floor(temp3);
                 document.getElementById("humidity3").innerHTML = "Humidity: " + humidity3;
 
                 // DAY FOUR OF FORECAST
@@ -177,7 +184,7 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL4 = "http://openweathermap.org/img/wn/" + icon4 + "@2x.png";
 
                 document.getElementById("date4").innerHTML = array4[0] + "<img src=" + iconURL4 + ">";
-                document.getElementById("temp4").innerHTML = "Temp (F) " + temp4;
+                document.getElementById("temp4").innerHTML = "Temp (F) " + Math.floor(temp4);
                 document.getElementById("humidity4").innerHTML = "Humidity: " + humidity4;
 
                 // DAY FIVE OF FORECAST
@@ -191,7 +198,7 @@ searchButton.addEventListener("click", function(event) {
                 let iconURL5 = "http://openweathermap.org/img/wn/" + icon5 + "@2x.png";
 
                 document.getElementById("date5").innerHTML = array5[0] + "<img src=" + iconURL5 + ">";
-                document.getElementById("temp5").innerHTML = "Temp (F) " + temp5;
+                document.getElementById("temp5").innerHTML = "Temp (F) " + Math.floor(temp5);
                 document.getElementById("humidity5").innerHTML = "Humidity: " + humidity5;
 
                 // "2019-11-27 03:00:00".split(" ")
@@ -201,6 +208,7 @@ searchButton.addEventListener("click", function(event) {
                 // document.getElementById("wind").innerHTML = "Wind Speed: " + response.data.wind.speed;
                 // document.getElementById("humidity").innerHTML = "Humidity: " + response.data.main.humidity;
                 // document.getElementById("temp").innerHTML = "Temperature (F) " + response.data.main.temp;
+
             })
 
 
