@@ -1,7 +1,7 @@
 function getCurrentWeather(response) {
     // console.log(response)
     let image = response.data.weather[0].icon;
-    let iconURL = "http://openweathermap.org/img/wn/" + image + "@2x.png";
+    let iconURL = "https://openweathermap.org/img/wn/" + image + "@2x.png";
     // console.log(iconURL)
     const imgEl = document.querySelector("img");
     // console.log(imgEl)
@@ -14,7 +14,7 @@ function getCurrentWeather(response) {
 
     // console.log(lat);
     // console.log(lon);
-    let queryURL3 = "http://api.openweathermap.org/data/2.5/uvi?appid=7a8635b4bf69d952fca178d66748f81f&lat=" + lat + "&lon=" + lon;
+    let queryURL3 = "https://api.openweathermap.org/data/2.5/uvi?appid=7a8635b4bf69d952fca178d66748f81f&lat=" + lat + "&lon=" + lon;
     axios.get(queryURL3)
         .then(function(uvResponse) {
             // console.log(uvResponse);
@@ -48,7 +48,7 @@ function getFiveDayForecast(response) {
     // console.log(forecastArray);
     let array1 = date1.split(" ");
 
-    let iconURL = "http://openweathermap.org/img/wn/" + icon1 + "@2x.png";
+    let iconURL = "https://openweathermap.org/img/wn/" + icon1 + "@2x.png";
 
     document.getElementById("date1").innerHTML = array1[0] + "<img src=" + iconURL + ">";
     document.getElementById("temp1").innerHTML = "Temp (F) " + Math.floor(temp1);
@@ -64,7 +64,7 @@ function getFiveDayForecast(response) {
     // console.log(forecastArray);
     let array2 = date2.split(" ");
 
-    let iconURL2 = "http://openweathermap.org/img/wn/" + icon2 + "@2x.png";
+    let iconURL2 = "https://openweathermap.org/img/wn/" + icon2 + "@2x.png";
 
     document.getElementById("date2").innerHTML = array2[0] + "<img src=" + iconURL2 + ">";
     document.getElementById("temp2").innerHTML = "Temp (F) " + Math.floor(temp2);
@@ -92,7 +92,7 @@ function getFiveDayForecast(response) {
     let humidity4 = day4.main.humidity;
     let array4 = date4.split(" ");
 
-    let iconURL4 = "http://openweathermap.org/img/wn/" + icon4 + "@2x.png";
+    let iconURL4 = "https://openweathermap.org/img/wn/" + icon4 + "@2x.png";
 
     document.getElementById("date4").innerHTML = array4[0] + "<img src=" + iconURL4 + ">";
     document.getElementById("temp4").innerHTML = "Temp (F) " + Math.floor(temp4);
@@ -106,7 +106,7 @@ function getFiveDayForecast(response) {
     let humidity5 = day5.main.humidity;
     let array5 = date5.split(" ");
 
-    let iconURL5 = "http://openweathermap.org/img/wn/" + icon5 + "@2x.png";
+    let iconURL5 = "https://openweathermap.org/img/wn/" + icon5 + "@2x.png";
 
     document.getElementById("date5").innerHTML = array5[0] + "<img src=" + iconURL5 + ">";
     document.getElementById("temp5").innerHTML = "Temp (F) " + Math.floor(temp5);
